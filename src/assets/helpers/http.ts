@@ -3,7 +3,10 @@ export const register = (data: {
   eth_network: string;
   imx_token: string;
 }) => {
-  return new Promise((resolve, reject) => {
+  return new Promise<{
+    message: string;
+    token: string;
+  }>((resolve, reject) => {
     fetch(`${process.env.REACT_APP_API_URL}/register`, {
       method: "POST",
       headers: {
@@ -20,4 +23,3 @@ export const register = (data: {
       });
   });
 };
-
