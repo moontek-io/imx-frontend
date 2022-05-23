@@ -2,6 +2,7 @@ import Footer from "../Footer";
 import styled from "styled-components";
 import Header from "../Header";
 import cns from "classnames";
+import { Outlet } from "react-router-dom";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -17,16 +18,18 @@ const Wrapper = styled.div`
 `;
 
 function PrimaryLayout({
-  children,
+  // children,
   className,
 }: {
-  children: React.ReactNode;
+  // children: React.ReactNode;
   className?: string;
 }) {
   return (
     <Wrapper>
       <Header />
-      <main className={cns("content", className)}>{children}</main>
+      <main className={cns("content", className)}>
+        <Outlet />
+      </main>
       <Footer />
     </Wrapper>
   );

@@ -1,36 +1,34 @@
-import { Link, ImmutableXClient } from "@imtbl/imx-sdk";
-import { useEffect, useState } from "react";
-require("dotenv").config();
+import { Image } from "react-bootstrap";
+import styled from "styled-components";
+import SetupImx from "./SetupImx";
+import wallet from "assets/nft-wallet.png";
+import GlassCard from "components/GlassCard";
+import BottomNavigation from "components/BottomNavigation";
 
-const ConnectWallet = () => {
-  // initialise Immutable X Link SDK
-  const link = new Link(process.env.REACT_APP_ROPSTEN_LINK_URL);
-
-  // general
-  const [wallet, setWallet] = useState("undefined");
-  const [client, setClient] = useState<ImmutableXClient>(Object);
-
-  useEffect(() => {
-    buildIMX();
-  }, []);
-
-  // initialise an Immutable X Client to interact with apis more easily
-  async function buildIMX() {
-    const publicApiUrl: string = process.env.REACT_APP_ROPSTEN_ENV_URL ?? "";
-    setClient(await ImmutableXClient.build({ publicApiUrl }));
+const Wrapper = styled.section`
+  text-align: center;
+  h1 {
+    font-size: 3.25rem;
   }
-
-  // register and/or setup a user
-  async function linkSetup(): Promise<void> {
-    const res = await link.setup({});
-    setWallet(res.address);
+  p {
+    font-size: 1.375rem;
   }
+`;
+function ConnectWallet() {
   return (
-    <>
-      <button onClick={linkSetup}>Setup</button>
-      <div>Active wallet: {wallet}</div>
-    </>
+    <Wrapper>
+      <GlassCard>
+        <figure>
+          <Image fluid width="188" src={wallet} alt="IMX Logo" />
+        </figure>
+        <h1 className="text-uppercase">
+          Connect your crypto wallet. your bounty will be yours at last.
+        </h1>
+        <SetupImx />
+      </GlassCard>
+      <BottomNavigation />
+    </Wrapper>
   );
-};
+}
 
 export default ConnectWallet;

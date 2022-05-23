@@ -1,14 +1,13 @@
 import { ActionButton } from "components/buttons";
-import { Container } from "react-bootstrap";
+import GlassCard from "components/GlassCard";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as Arrow } from "../../assets/arrow-right.svg";
 
 const HomeWrapper = styled.section`
-  max-width: 675px;
-  margin: 0 auto;
   text-align: center;
   h1 {
-    font-size: 3.75rem;
+    font-size: 3.25rem;
   }
   p {
     font-size: 1.375rem;
@@ -17,15 +16,19 @@ const HomeWrapper = styled.section`
 function Home() {
   return (
     <HomeWrapper>
-      <h1 className="text-uppercase">The main title goes here</h1>
-      <p className="mt-2">
-        Subtext Goes here lorem ipsum dolor sit amet, consectetur adipiscing
-        elit. Rhoncus non, diam sit etiam. Mi morbi egestas varius.
-      </p>
-      <ActionButton variant="primary" size="lg" className="mt-4">
-        Join now
-        <Arrow />
-      </ActionButton>
+      <GlassCard>
+        <h1 className="text-uppercase">The main title goes here</h1>
+        <p className="mt-2">
+          Subtext Goes here lorem ipsum dolor sit amet, consectetur adipiscing <br />
+          elit. Rhoncus non, diam sit etiam. Mi morbi egestas varius.
+        </p>
+        <Link to="/connect">
+          <ActionButton variant="primary" size="lg" className="mt-4">
+            Join now
+            <Arrow />
+          </ActionButton>
+        </Link>
+      </GlassCard>
     </HomeWrapper>
   );
 }
