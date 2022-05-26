@@ -1,20 +1,20 @@
 import { Link, ImmutableXClient } from "@imtbl/imx-sdk";
-import { register } from "assets/helpers/http";
-import { showError, showMsg } from "assets/helpers/utils";
+import { showError, showMsg } from "helpers/utils";
 import { ActionButton } from "components/buttons";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { ReactComponent as Arrow } from "../../assets/arrow-right.svg";
+import { register } from "helpers/http/apis";
+import { useAuth } from "contexts/auth-context";
+import { Link as NavLink } from "react-router-dom";
 
 require("dotenv").config();
 
 const SetupImx = () => {
-  // initialise Immutable X Link SDK
+  const { authorize, isAuthenticated } = useAuth();
   const link = new Link(process.env.REACT_APP_ROPSTEN_LINK_URL);
-
-  // general
-  const [wallet, setWallet] = useState("undefined");
-  const [client, setClient] = useState<ImmutableXClient>(Object);
+  // const [client, setClient] = useState<ImmutableXClient>();
+  const client = useRef<ImmutableXClient>();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     buildIMX();
@@ -23,7 +23,7 @@ const SetupImx = () => {
   // initialise an Immutable X Client to interact with apis more easily
   async function buildIMX() {
     const publicApiUrl: string = process.env.REACT_APP_ROPSTEN_ENV_URL ?? "";
-    setClient(await ImmutableXClient.build({ publicApiUrl }));
+    client.current = await ImmutableXClient.build({ publicApiUrl });
   }
 
   // register and/or setup a user
@@ -31,7 +31,6 @@ const SetupImx = () => {
     setLoading(true);
     const res = await link.setup({});
     setLoading(false);
-    setWallet(res.address);
     register({
       wallet_address: res.address,
       eth_network: res.ethNetwork,
@@ -39,7 +38,8 @@ const SetupImx = () => {
     })
       .then((res) => {
         if (res.token) {
-          localStorage.setItem("token", res.token);
+          // localStorage.setItem("token", res.token);
+          authorize(res.token);
           showMsg(res.message);
         }
       })
@@ -49,23 +49,32 @@ const SetupImx = () => {
           err?.response?.data?.message || err?.message || err?.toString()
         );
       });
-    // console.log(res);
-    // console.log(client);
-    // console.log(wallet);
   }
   return (
     <>
-      <ActionButton
-        onClick={linkSetup}
-        variant="primary"
-        size="lg"
-        className="mt-4"
-        disabled={loading}
-      >
-        Connect wallet
-        {loading ? <Spinner animation="grow" /> : <Arrow />}
-      </ActionButton>
-      {/* <div>Active wallet: {wallet}</div> */}
+      {isAuthenticated ? (
+        <NavLink to="/discord">
+          <ActionButton
+            variant="primary"
+            size="lg"
+            className="mt-4"
+            disabled={loading}
+          >
+            Wallet connected <Arrow />
+          </ActionButton>
+        </NavLink>
+      ) : (
+        <ActionButton
+          onClick={linkSetup}
+          variant="primary"
+          size="lg"
+          className="mt-4"
+          disabled={loading}
+        >
+          Connect wallet
+          {loading ? <Spinner animation="grow" /> : <Arrow />}
+        </ActionButton>
+      )}
     </>
   );
 };

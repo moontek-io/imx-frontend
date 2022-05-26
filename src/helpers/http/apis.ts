@@ -1,3 +1,5 @@
+import { apiClient } from "./client";
+
 export const register = (data: {
   wallet_address: string;
   eth_network: string;
@@ -22,4 +24,10 @@ export const register = (data: {
         reject(error);
       });
   });
+};
+
+export const linkDiscord = (token: string) => {
+  return apiClient
+    .post("/link-discord", { discordToken: token })
+    .then((response) => response.data);
 };

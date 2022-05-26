@@ -1,23 +1,27 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const MENU_ITEMS = [
   {
     id: "connect",
     label: "Connect wallet",
+    path: "/connect",
   },
   {
     id: "join-discord",
     label: "Join discord",
+    path: "/discord",
   },
   {
     id: "add-email",
     label: "Add Email",
+    path: "/add-email",
   },
   {
     id: "claim-nft",
     label: "Claim Your nft",
+    path: "/claim-nft",
   },
 ];
 const Wrapper = styled.div`
@@ -74,11 +78,16 @@ const Wrapper = styled.div`
 `;
 
 function BottomNavigation() {
+  const location = useLocation();
+
   return (
     <Wrapper>
       <ul className="list-unstyled mb-0">
-        {MENU_ITEMS.map(({ id, label }) => (
-          <li key={id} className={id === "connect" ? "active" : ""}>
+        {MENU_ITEMS.map(({ id, label, path }) => (
+          <li
+            key={id}
+            className={location.pathname?.includes(path) ? "active" : ""}
+          >
             <Link to="/">{label}</Link>
           </li>
         ))}
