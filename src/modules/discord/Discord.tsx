@@ -66,7 +66,11 @@ function Discord() {
             </ActionButton>
           </Link>
         ) : (
-          <a href={process.env.REACT_APP_DISCORD_URL}>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href={process.env.REACT_APP_DISCORD_URL}
+          >
             <ActionButton variant="primary" size="lg" className="mt-4">
               Discord Link
               <Arrow />
