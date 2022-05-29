@@ -21,5 +21,8 @@ const MyGlobalStyle = styled.createGlobalStyle`
   button {
     font-family: ${myTheme.font.secondary};
   }
+  .font-secondary{
+    font-family: ${myTheme.font.secondary};
+  }
 `;
 export default MyGlobalStyle;

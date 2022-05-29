@@ -62,7 +62,6 @@ function Discord() {
           <Link to="/add-email">
             <ActionButton variant="primary" size="lg" className="mt-4">
               Continue
-              <Arrow />
             </ActionButton>
           </Link>
         ) : (
@@ -73,12 +72,10 @@ function Discord() {
           >
             <ActionButton variant="primary" size="lg" className="mt-4">
               Discord Link
-              <Arrow />
             </ActionButton>
           </a>
         )}
       </GlassCard>
-
       <BottomNavigation />
     </Wrapper>
   );

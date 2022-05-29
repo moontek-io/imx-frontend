@@ -1,7 +1,12 @@
+import { useMemo, useState } from "react";
 import GlassCard from "components/GlassCard";
 import styled from "styled-components";
-
-const HomeWrapper = styled.section`
+import EmailForm from "./EmailForm";
+import OtpForm from "./OtpForm";
+import Success from "./Success";
+import type { Steps } from "./types";
+import BottomNavigation from "components/BottomNavigation";
+const Wrapper = styled.section`
   text-align: center;
   h1 {
     font-size: 3.25rem;
@@ -10,18 +15,41 @@ const HomeWrapper = styled.section`
     font-size: 1.375rem;
   }
 `;
+
+const Components = {
+  email: EmailForm,
+  otp: OtpForm,
+  done: Success,
+};
 function AddEmail() {
+  const [currentStep, setCurrentStep] = useState<Steps>("email");
+  const StepComponent = useMemo(() => Components[currentStep], [currentStep]);
+  const onUpdateStep = (step: Steps) => setCurrentStep(step);
   return (
-    <HomeWrapper>
+    <Wrapper>
       <GlassCard>
-        <h1 className="text-uppercase">Add email to continue</h1>
-        <p className="mt-2">
-          Please enter your email address. To continue to the next page. Verify
-          it by clicking the link sent to <br /> your email to claim more
-          rewards.
-        </p>
+        {currentStep === "email" && (
+          <>
+            <h1 className="text-uppercase">Add email to continue</h1>
+            <p className="m-auto mt-2 " style={{ maxWidth: 780 }}>
+              Please enter your email address. To continue to the next page.
+              Verify it by clicking the link sent to your email to claim more
+              rewards.
+            </p>
+          </>
+        )}
+        {currentStep === "otp" && (
+          <>
+            <h1 className="text-uppercase">Enter OTP</h1>
+            <p className="text-center">
+              Pleaes enter 6 digit OTP sent to your email.
+            </p>
+          </>
+        )}
+        <StepComponent onUpdateStep={onUpdateStep} />
       </GlassCard>
-    </HomeWrapper>
+      <BottomNavigation />
+    </Wrapper>
   );
 }
 
