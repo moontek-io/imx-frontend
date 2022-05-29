@@ -51,7 +51,6 @@ const SetupImx = () => {
           );
         });
     } catch (e) {
-      // const error: { message: string } = e.message;
       let message;
       setLoading(false);
       if (e instanceof Error) message = e.message;
@@ -69,7 +68,7 @@ const SetupImx = () => {
             className="mt-4"
             disabled={loading}
           >
-            Wallet connected <Arrow />
+            Wallet connected
           </ActionButton>
         </NavLink>
       ) : (
@@ -79,6 +78,7 @@ const SetupImx = () => {
           size="lg"
           className="mt-4"
           disabled={loading}
+          arrow={false}
         >
           Connect wallet
           {loading ? <Spinner animation="grow" /> : <Arrow />}

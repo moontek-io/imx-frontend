@@ -15,7 +15,7 @@ const HomeWrapper = styled.section`
 `;
 function Home() {
   return (
-    <HomeWrapper>
+    <HomeWrapper>   
       <GlassCard>
         <h1 className="text-uppercase">The main title goes here</h1>
         <p className="mt-2">
@@ -25,7 +25,6 @@ function Home() {
         <Link to="/connect">
           <ActionButton variant="primary" size="lg" className="mt-4">
             Join now
-            <Arrow />
           </ActionButton>
         </Link>
       </GlassCard>

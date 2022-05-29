@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
+import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 const onResponse = (response: AxiosResponse): AxiosResponse => {
   console.info(`[response] [${JSON.stringify(response)}]`);
@@ -8,9 +9,10 @@ const onResponse = (response: AxiosResponse): AxiosResponse => {
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {
   console.error(`[response error] [${JSON.stringify(error)}]`);
   if (error.response?.status === 401) {
+    Cookies.remove("token");
     toast.error("Session expired. Please login again.");
     setTimeout(() => {
-      window.location.replace("/");
+      window.location.replace("/connect");
     }, 1000);
   }
   return Promise.reject(error);

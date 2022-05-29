@@ -6,6 +6,7 @@ const myTheme = {
   },
   colors: {
     primary: "#005FCE",
+    text: "0D0C0D",
   },
   fontSize: {
     sm: "1.2rem",

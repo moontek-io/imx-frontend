@@ -1,7 +1,8 @@
-import { Button } from "react-bootstrap";
+import { Button, ButtonProps } from "react-bootstrap";
 import styled from "styled-components";
+import { ReactComponent as Arrow } from "assets/arrow-right.svg";
 
-export const ActionButton = styled(Button)`
+export const StyledButton = styled(Button)`
   display: inline-flex;
   align-items: center;
   gap: 0.857rem;
@@ -12,3 +13,21 @@ export const ActionButton = styled(Button)`
   border-radius: 0.75rem;
   box-shadow: 0 0 0 2px rgba(0, 95, 206, 0.17);
 `;
+
+interface Props extends ButtonProps {
+  children: React.ReactNode;
+  arrow?: boolean;
+}
+export const ActionButton = (props: Props) => {
+  const { children, arrow = true } = props;
+  return (
+    <StyledButton {...props}>
+      {children}
+      {arrow && <Arrow />}
+    </StyledButton>
+  );
+};
+
+// {
+//   /* <Arrow /> */
+// }

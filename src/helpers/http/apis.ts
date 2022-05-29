@@ -31,3 +31,15 @@ export const linkDiscord = (token: string) => {
     .post("/link-discord", { discordToken: token })
     .then((response) => response.data);
 };
+
+export const sendVerificationEmail = (email: string) => {
+  return apiClient
+    .post(`/send-verification-email?email=${email}`)
+    .then((response) => response.data);
+};
+
+export const verifyEmail = (otp: string) => {
+  return apiClient
+    .post(`verify-email?verificationToken=${otp}`)
+    .then((response) => response.data);
+};
