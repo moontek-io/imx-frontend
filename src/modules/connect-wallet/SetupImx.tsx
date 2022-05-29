@@ -29,26 +29,35 @@ const SetupImx = () => {
   // register and/or setup a user
   async function linkSetup(): Promise<void> {
     setLoading(true);
-    const res = await link.setup({});
-    setLoading(false);
-    register({
-      wallet_address: res.address,
-      eth_network: res.ethNetwork,
-      imx_token: res.starkPublicKey,
-    })
-      .then((res) => {
-        if (res.token) {
-          // localStorage.setItem("token", res.token);
-          authorize(res.token);
-          showMsg(res.message);
-        }
+    try {
+      const res = await link.setup({});
+      setLoading(false);
+      register({
+        wallet_address: res.address,
+        eth_network: res.ethNetwork,
+        imx_token: res.starkPublicKey,
       })
-      .catch((err) => {
-        setLoading(false);
-        showError(
-          err?.response?.data?.message || err?.message || err?.toString()
-        );
-      });
+        .then((res) => {
+          if (res.token) {
+            // localStorage.setItem("token", res.token);
+            authorize(res.token);
+            showMsg(res.message);
+          }
+        })
+        .catch((err) => {
+          setLoading(false);
+          showError(
+            err?.response?.data?.message || err?.message || err?.toString()
+          );
+        });
+    } catch (e) {
+      // const error: { message: string } = e.message;
+      let message;
+      setLoading(false);
+      if (e instanceof Error) message = e.message;
+      else message = String(e);
+      showError(message);
+    }
   }
   return (
     <>
