@@ -88,7 +88,7 @@ function BottomNavigation() {
             key={id}
             className={location.pathname?.includes(path) ? "active" : ""}
           >
-            <Link to="/">{label}</Link>
+            <Link to={path}>{label}</Link>
           </li>
         ))}
       </ul>
