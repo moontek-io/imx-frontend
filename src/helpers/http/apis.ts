@@ -38,8 +38,11 @@ export const sendVerificationEmail = (email: string) => {
     .then((response) => response.data);
 };
 
-export const verifyEmail = (otp: string) => {
+export const verifyEmail = (payload: {
+  verificationToken: string;
+  otp: string;
+}) => {
   return apiClient
-    .post(`verify-email?verificationToken=${otp}`)
+    .post(`/verify-email`, payload)
     .then((response) => response.data);
 };

@@ -4,7 +4,6 @@ import { Form } from "react-bootstrap";
 import styled from "styled-components";
 import { getErrorMessage, hasValidEmail, showError } from "helpers/utils";
 import { sendVerificationEmail } from "helpers/http/apis";
-import { ReactComponent as Arrow } from "assets/arrow-right.svg";
 import toast from "react-hot-toast";
 import { StepComponentProps } from "./types";
 
@@ -26,7 +25,7 @@ const FormWrapper = styled.form`
   }
 `;
 
-function EmailForm({ onUpdateStep }: StepComponentProps) {
+function EmailForm({ onUpdateStep, updateState }: StepComponentProps) {
   const [email, setEmail] = useState<string>("");
   const onEmailSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,6 +38,9 @@ function EmailForm({ onUpdateStep }: StepComponentProps) {
       loading: "Sending verification email...",
       success: (res) => {
         onUpdateStep("otp");
+        updateState({
+          verification_token: res.token,
+        });
         return res.message;
       },
       error: getErrorMessage,
@@ -65,7 +67,9 @@ function EmailForm({ onUpdateStep }: StepComponentProps) {
             variant="primary"
             size="lg"
             disabled={email.length < 1}
-          > Add Email
+          >
+            {" "}
+            Add Email
           </ActionButton>
         </div>
       </div>

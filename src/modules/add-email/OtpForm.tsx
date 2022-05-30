@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { ActionButton } from "components/buttons";
 import { Form } from "react-bootstrap";
 import styled from "styled-components";
-import { getErrorMessage, hasValidEmail, showError } from "helpers/utils";
-import { sendVerificationEmail, verifyEmail } from "helpers/http/apis";
-import { ReactComponent as Arrow } from "assets/arrow-right.svg";
+import { getErrorMessage } from "helpers/utils";
+import { verifyEmail } from "helpers/http/apis";
 import toast from "react-hot-toast";
 import { StepComponentProps } from "./types";
 
@@ -26,11 +25,15 @@ const FormWrapper = styled.form`
   }
 `;
 
-function OtpForm({ onUpdateStep }: StepComponentProps) {
+function OtpForm({ onUpdateStep, state }: StepComponentProps) {
   const [otp, setOtp] = useState<string>("");
   const onOtpSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const promise = verifyEmail(otp);
+    if (!state.verification_token) return;
+    const promise = verifyEmail({
+      verificationToken: state.verification_token,
+      otp,
+    });
     toast.promise(promise, {
       loading: "Verifying email...",
       success: (res) => {

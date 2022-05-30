@@ -2,7 +2,6 @@ import { ActionButton } from "components/buttons";
 import GlassCard from "components/GlassCard";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ReactComponent as Arrow } from "../../assets/arrow-right.svg";
 
 const HomeWrapper = styled.section`
   text-align: center;
@@ -15,11 +14,12 @@ const HomeWrapper = styled.section`
 `;
 function Home() {
   return (
-    <HomeWrapper>   
+    <HomeWrapper>
       <GlassCard>
         <h1 className="text-uppercase">The main title goes here</h1>
         <p className="mt-2">
-          Subtext Goes here lorem ipsum dolor sit amet, consectetur adipiscing <br />
+          Subtext Goes here lorem ipsum dolor sit amet, consectetur adipiscing{" "}
+          <br />
           elit. Rhoncus non, diam sit etiam. Mi morbi egestas varius.
         </p>
         <Link to="/connect">

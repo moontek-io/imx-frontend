@@ -5,7 +5,6 @@ import { Image } from "react-bootstrap";
 import GlassCard from "components/GlassCard";
 import BottomNavigation from "components/BottomNavigation";
 import { ActionButton } from "components/buttons";
-import { ReactComponent as Arrow } from "assets/arrow-right.svg";
 import discord from "assets/discord-logo.svg";
 import checkmark from "assets/checkmark.svg";
 import { linkDiscord } from "helpers/http/apis";
