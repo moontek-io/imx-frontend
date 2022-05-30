@@ -23,6 +23,14 @@ const Components = {
 };
 function AddEmail() {
   const [currentStep, setCurrentStep] = useState<Steps>("email");
+  const [state, setState] = useState<{
+    verification_token: string | null;
+  }>({
+    verification_token: null,
+  });
+  const updateState = (updates: { verification_token?: string }) => {
+    setState((prev) => ({ ...prev, ...updates }));
+  };
   const StepComponent = useMemo(() => Components[currentStep], [currentStep]);
   const onUpdateStep = (step: Steps) => setCurrentStep(step);
   return (
@@ -46,7 +54,11 @@ function AddEmail() {
             </p>
           </>
         )}
-        <StepComponent onUpdateStep={onUpdateStep} />
+        <StepComponent
+          onUpdateStep={onUpdateStep}
+          updateState={updateState}
+          state={state}
+        />
       </GlassCard>
       <BottomNavigation />
     </Wrapper>
