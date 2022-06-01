@@ -27,11 +27,16 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     const token = Cookies.get("token");
     if (token) {
       setToken(token);
-      getProfile().then((res) => {
-        setUser(res.data);
-      });
-      setIsAuthenticated(true);
-      setIsBootstrapped(true);
+      getProfile()
+        .then((res) => {
+          setUser(res.data);
+          setIsAuthenticated(true);
+          setIsBootstrapped(true);
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsBootstrapped(true);
+        });
       return;
     }
     setIsBootstrapped(true);
