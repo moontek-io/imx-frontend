@@ -46,3 +46,7 @@ export const verifyEmail = (payload: {
     .post(`/verify-email`, payload)
     .then((response) => response.data);
 };
+
+export const getProfile = () => {
+  return apiClient.get(`/get-profile`).then((response) => response.data);
+};

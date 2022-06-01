@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import GlassCard from "components/GlassCard";
 import styled from "styled-components";
 import EmailForm from "./EmailForm";
@@ -6,6 +6,7 @@ import OtpForm from "./OtpForm";
 import Success from "./Success";
 import type { Steps } from "./types";
 import BottomNavigation from "components/BottomNavigation";
+import { useAuth } from "contexts/auth-context";
 const Wrapper = styled.section`
   text-align: center;
   h1 {
@@ -22,7 +23,15 @@ const Components = {
   done: Success,
 };
 function AddEmail() {
+  const { user } = useAuth();
   const [currentStep, setCurrentStep] = useState<Steps>("email");
+  
+  useEffect(() => {
+    if (user?.discord_member_id) {
+      setCurrentStep("done");
+    }
+  }, [user]);
+
   const [state, setState] = useState<{
     verification_token: string | null;
   }>({
