@@ -9,6 +9,7 @@ import discord from "assets/discord-logo.svg";
 import checkmark from "assets/checkmark.svg";
 import { linkDiscord } from "helpers/http/apis";
 import { showMsg } from "helpers/utils";
+import { useAuth } from "contexts/auth-context";
 
 const Wrapper = styled.section`
   text-align: center;
@@ -31,6 +32,12 @@ const Wrapper = styled.section`
 
 function Discord() {
   const [discordLinked, setDiscordLinked] = useState(false);
+  const { user } = useAuth();
+  useEffect(() => {
+    if (user?.discord_member_id) {
+      setDiscordLinked(true);
+    }
+  }, [user]);
   const { id } = useParams();
   useEffect(() => {
     if (id && !discordLinked) {
