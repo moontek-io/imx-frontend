@@ -11,6 +11,7 @@ import NoMatch from "modules/no-match";
 import Discord from "modules/discord/Discord";
 import RequireAuth from "components/RequireAuth";
 import AddEmail from "modules/add-email/AddEmail";
+import ClaimNft from "modules/claim-nft/ClaimNft";
 
 function App() {
   return (
@@ -39,17 +40,21 @@ function App() {
             path="add-email"
             element={
               <RequireAuth>
-                <AddEmail/>
+                <AddEmail />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="claim-nft"
+            element={
+              <RequireAuth>
+                <ClaimNft />
               </RequireAuth>
             }
           />
           <Route path="*" element={<NoMatch />} />
         </Route>
       </Routes>
-
-      {/* <PrimaryLayout>
-        <Home />
-      </PrimaryLayout> */}
       <MyGlobalStyle />
     </ThemeProvider>
   );

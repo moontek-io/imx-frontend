@@ -25,9 +25,9 @@ const Components = {
 function AddEmail() {
   const { user } = useAuth();
   const [currentStep, setCurrentStep] = useState<Steps>("email");
-  
+
   useEffect(() => {
-    if (user?.discord_member_id) {
+    if (user?.user_email_id) {
       setCurrentStep("done");
     }
   }, [user]);

@@ -3,6 +3,7 @@ import successCheckMark from "assets/success.svg";
 import { Image } from "react-bootstrap";
 import { ActionButton } from "components/buttons";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 const SuccessWrapper = styled.div`
   .success-description {
     text-align: center;
@@ -22,9 +23,11 @@ function Success() {
         Your email successfully verified! Please click continue to Claim your
         NFT
       </p>
-      <ActionButton variant="primary" size="lg" className="mt-4">
-        Continue
-      </ActionButton>
+      <Link to="/claim-nft">
+        <ActionButton variant="primary" size="lg" className="mt-4">
+          Continue
+        </ActionButton>
+      </Link>
     </SuccessWrapper>
   );
 }
