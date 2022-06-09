@@ -50,3 +50,6 @@ export const verifyEmail = (payload: {
 export const getProfile = () => {
   return apiClient.get(`/get-profile`).then((response) => response.data);
 };
+
+export const redeemNft = () =>
+  apiClient.post("/redeem-nft", {}).then((response) => response.data);
