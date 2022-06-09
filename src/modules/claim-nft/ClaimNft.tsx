@@ -7,6 +7,7 @@ import { ActionButton } from "components/buttons";
 import nfticon from "assets/NFT.svg";
 import { redeemNft } from "helpers/http/apis";
 import { ReactComponent as Arrow } from "assets/arrow-right.svg";
+import toast from "react-hot-toast";
 
 const Wrapper = styled.section`
   text-align: center;
@@ -23,19 +24,30 @@ function ClaimNft() {
   });
   const onClaimNft = () => {
     setState((prev) => ({ ...prev, error: null, loading: true }));
-    redeemNft()
+    const promise = redeemNft()
       .then((res) => {
-        setState({ error: null, data: res, loading: false });
-        console.log(res);
+        if (res.status) {
+          setState({ error: null, data: res, loading: false });
+        } else {
+          setState({ error: res.message, data: null, loading: false });
+          throw new Error(res.message);
+        }
       })
       .catch((err) => {
-        console.error(err);
         setState({
           error: err?.response?.data?.message || err.toString(),
           data: null,
           loading: false,
         });
       });
+    toast.promise(promise, {
+      loading: "Redeeming NFT...",
+      success: "NFT redeemed successfully!",
+      error: (error) =>
+        `Error redeeming NFT: ${
+          error?.response.data?.message || error.toString()
+        }`,
+    });
   };
   return (
     <Wrapper>

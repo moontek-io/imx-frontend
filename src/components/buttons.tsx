@@ -19,9 +19,9 @@ interface Props extends ButtonProps {
   arrow?: boolean;
 }
 export const ActionButton = (props: Props) => {
-  const { children, arrow = true } = props;
+  const { children, arrow = true, ...rest } = props;
   return (
-    <StyledButton {...props}>
+    <StyledButton {...rest}>
       {children}
       {arrow && <Arrow />}
     </StyledButton>
