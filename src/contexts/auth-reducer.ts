@@ -30,7 +30,6 @@ function authReducer(state = INITIAL_STATE, action: AuthAction) {
         error: action.payload,
       };
     case "AUTHORIZE_USER":
-      debugger;
       return {
         ...state,
         isAuthenticated: true,
