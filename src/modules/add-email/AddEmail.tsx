@@ -28,7 +28,7 @@ function AddEmail() {
 
   useEffect(() => {
     if (user?.user_email_id) {
-      setCurrentStep("done");
+      // setCurrentStep("done");
     }
   }, [user]);
 

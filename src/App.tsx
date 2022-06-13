@@ -12,6 +12,7 @@ import Discord from "modules/discord/Discord";
 import RequireAuth from "components/RequireAuth";
 import AddEmail from "modules/add-email/AddEmail";
 import ClaimNft from "modules/claim-nft/ClaimNft";
+import InviteFriend from "modules/invite-friend/InviteFriend";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<PrimaryLayout />}>
           <Route index element={<Home />} />
           <Route path="connect" element={<ConnectWallet />} />
+          <Route path="connect/:referralCode" element={<ConnectWallet />} />
           <Route
             path="discord"
             element={
@@ -49,6 +51,14 @@ function App() {
             element={
               <RequireAuth>
                 <ClaimNft />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="invite"
+            element={
+              <RequireAuth>
+                <InviteFriend />
               </RequireAuth>
             }
           />

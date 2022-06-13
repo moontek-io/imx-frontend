@@ -23,7 +23,13 @@ const MENU_ITEMS = [
     label: "Claim Your nft",
     path: "/claim-nft",
   },
+  {
+    id: "invite-friends",
+    label: "Invite your friend",
+    path: "/invite",
+  },
 ];
+
 const Wrapper = styled.div`
   width: 100%;
   display: flex;

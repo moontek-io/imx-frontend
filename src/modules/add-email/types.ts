@@ -17,4 +17,5 @@ export type UserType = {
   is_confirmed: boolean;
   user_email_id: string;
   wallet_address: string;
+  referral_code: string;
 };

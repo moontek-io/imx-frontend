@@ -12,6 +12,9 @@ export const StyledButton = styled(Button)`
   height: 70px;
   border-radius: 0.75rem;
   box-shadow: 0 0 0 2px rgba(0, 95, 206, 0.17);
+  &.btn-primary-outline{
+    background-color: transparent;
+  }
 `;
 
 interface Props extends ButtonProps {
@@ -27,7 +30,3 @@ export const ActionButton = (props: Props) => {
     </StyledButton>
   );
 };
-
-// {
-//   /* <Arrow /> */
-// }

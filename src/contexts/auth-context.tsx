@@ -40,7 +40,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
         });
       });
   }, []);
-
+  
   React.useEffect(() => {
     const token = Cookies.get("token");
     if (token) {
