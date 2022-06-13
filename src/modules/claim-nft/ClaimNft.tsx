@@ -8,6 +8,7 @@ import nfticon from "assets/NFT.svg";
 import { redeemNft } from "helpers/http/apis";
 import { ReactComponent as Arrow } from "assets/arrow-right.svg";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.section`
   text-align: center;
@@ -17,6 +18,7 @@ const Wrapper = styled.section`
 `;
 
 function ClaimNft() {
+  const navigate = useNavigate();
   const [state, setState] = React.useState({
     data: null,
     loading: false,
@@ -28,6 +30,7 @@ function ClaimNft() {
       .then((res) => {
         if (res.status) {
           setState({ error: null, data: res, loading: false });
+          navigate("/invite");
         } else {
           setState({ error: res.message, data: null, loading: false });
           throw new Error(res.message);
