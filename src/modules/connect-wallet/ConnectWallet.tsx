@@ -4,6 +4,7 @@ import SetupImx from "./SetupImx";
 import wallet from "assets/nft-wallet.png";
 import GlassCard from "components/GlassCard";
 import BottomNavigation from "components/BottomNavigation";
+import { useParams } from "react-router-dom";
 
 const Wrapper = styled.section`
   text-align: center;
@@ -15,6 +16,7 @@ const Wrapper = styled.section`
   }
 `;
 function ConnectWallet() {
+  const { referralCode } = useParams();
   return (
     <Wrapper>
       <GlassCard>
@@ -24,7 +26,7 @@ function ConnectWallet() {
         <h1 className="text-uppercase">
           Connect your crypto wallet. your bounty will be yours at last.
         </h1>
-        <SetupImx />
+        <SetupImx referral={referralCode} />
       </GlassCard>
       <BottomNavigation />
     </Wrapper>

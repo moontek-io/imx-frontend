@@ -4,6 +4,7 @@ export const register = (data: {
   wallet_address: string;
   eth_network: string;
   imx_token: string;
+  referral_code?: string;
 }) => {
   return new Promise<{
     message: string;

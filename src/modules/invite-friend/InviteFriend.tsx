@@ -10,6 +10,7 @@ import { ReactComponent as Copy } from "assets/copy.svg";
 import toast from "react-hot-toast";
 import { useAuth } from "contexts/auth-context";
 import { showError, showMsg } from "helpers/utils";
+import { useLocation } from "react-router-dom";
 
 const Wrapper = styled.section`
   text-align: center;
@@ -24,21 +25,22 @@ const Wrapper = styled.section`
 
 function InviteFriend() {
   const { user } = useAuth();
-  console.log(user);
   const onCopy = () => {
     if (!user?.referral_code) {
       showError("You don't have a referral code yet.");
       return;
     }
-    navigator.clipboard.writeText(`/connect/${user.referral_code}`).then(
-      () => {
-        showMsg("Copied to clipboard!");
-      },
-      function () {
-        /* clipboard write failed */
-        alert("failed");
-      }
-    );
+    navigator.clipboard
+      .writeText(`${window.location.origin}/connect/${user.referral_code}`)
+      .then(
+        () => {
+          showMsg("Copied to clipboard!");
+        },
+        function () {
+          /* clipboard write failed */
+          alert("failed");
+        }
+      );
   };
   return (
     <Wrapper>

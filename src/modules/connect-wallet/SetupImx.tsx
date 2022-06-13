@@ -10,7 +10,7 @@ import { Link as NavLink } from "react-router-dom";
 
 require("dotenv").config();
 
-const SetupImx = () => {
+const SetupImx = ({ referral }: { referral?: string }) => {
   const { authorize, isAuthenticated } = useAuth();
   const link = new Link(process.env.REACT_APP_ROPSTEN_LINK_URL);
   // const [client, setClient] = useState<ImmutableXClient>();
@@ -32,11 +32,13 @@ const SetupImx = () => {
     try {
       const res = await link.setup({});
       setLoading(false);
-      register({
+      const payload = {
         wallet_address: res.address,
         eth_network: res.ethNetwork,
         imx_token: res.starkPublicKey,
-      })
+        referral_code: referral || "",
+      };
+      register(payload)
         .then((res) => {
           if (res.token) {
             // localStorage.setItem("token", res.token);
