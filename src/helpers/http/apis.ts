@@ -53,4 +53,9 @@ export const getProfile = () => {
 };
 
 export const redeemNft = () =>
-  apiClient.post("/redeem-nft", {}).then((response) => response.data);
+  apiClient.post("/redeem-nft", {}).then((response) => {
+    if (!response.data.status) {
+      throw new Error(response.data.message);
+    }
+    return response.data;
+  });

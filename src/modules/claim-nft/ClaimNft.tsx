@@ -26,30 +26,29 @@ function ClaimNft() {
   });
   const onClaimNft = () => {
     setState((prev) => ({ ...prev, error: null, loading: true }));
-    const promise = redeemNft()
-      .then((res) => {
+    const promise = redeemNft();
+
+    toast.promise(promise, {
+      loading: "Redeeming NFT...",
+      success: (res) => {
         if (res.status) {
           setState({ error: null, data: res, loading: false });
           navigate("/invite");
         } else {
           setState({ error: res.message, data: null, loading: false });
-          throw new Error(res.message);
         }
-      })
-      .catch((err) => {
+        return res.message;
+      },
+      error: (error) => {
         setState({
-          error: err?.response?.data?.message || err.toString(),
+          error: error?.response?.data?.message || error.toString(),
           data: null,
           loading: false,
         });
-      });
-    toast.promise(promise, {
-      loading: "Redeeming NFT...",
-      success: "NFT redeemed successfully!",
-      error: (error) =>
-        `Error redeeming NFT: ${
+        return `Error redeeming NFT: ${
           error?.response.data?.message || error.toString()
-        }`,
+        }`;
+      },
     });
   };
   return (
