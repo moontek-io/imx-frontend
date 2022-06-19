@@ -32,7 +32,7 @@ export const STEPPER = [
   },
   {
     id: STEPS.ADD_EMAIL,
-    label: "Join discord",
+    label: "Add Email",
     path: "/add-email",
     next: STEPS.CLAIM_NFT,
     disabled: [STEPS.CONNECT, STEPS.JOIN_DISCORD],
