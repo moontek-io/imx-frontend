@@ -54,6 +54,9 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
       .then((res) => {
         dispatch({ type: ActionTypes.AUTHORIZE_USER, payload: res.data });
         cb && cb();
+        const step = getStep(res.data.active_step);
+        setCurrentStep(res.data.active_step);
+        step?.path && navigate(step?.path);
       })
       .catch((err) => {
         dispatch({
@@ -61,7 +64,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
           payload: err?.response?.data?.message || err?.toString(),
         });
       });
-  }, []);
+  }, [navigate, setCurrentStep]);
 
   React.useEffect(() => {
     const token = Cookies.get("token");
@@ -71,7 +74,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
       return;
     }
     dispatch({ type: ActionTypes.SET_BOOTSTRAPPED });
-  }, [activeStep?.path, getUserProfile, navigate]);
+  }, [getUserProfile]);
 
   const authorize = React.useCallback(
     (token: string) => {

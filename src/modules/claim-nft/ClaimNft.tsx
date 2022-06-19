@@ -28,7 +28,6 @@ function ClaimNft() {
   const onClaimNft = () => {
     setState((prev) => ({ ...prev, error: null, loading: true }));
     const promise = redeemNft();
-
     toast.promise(promise, {
       loading: "Redeeming NFT...",
       success: (res) => {

@@ -47,7 +47,7 @@ export const STEPPER = [
   {
     id: STEPS.INVITE_FRIENDS,
     label: "Invite friends",
-    path: "/invite-friends",
+    path: "/invite",
     next: null,
     disabled: [
       STEPS.CONNECT,
