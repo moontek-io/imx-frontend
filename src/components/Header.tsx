@@ -1,9 +1,6 @@
 import { ReactComponent as Logo } from "../assets/logo.svg";
-import { ReactComponent as Twitter } from "../assets/twitter.svg";
-import { ReactComponent as Medium } from "../assets/medium.svg";
-import { ReactComponent as Telegram } from "../assets/telegram.svg";
-import { ReactComponent as Discord } from "../assets/discord.svg";
 import { NavLink } from "react-bootstrap";
+import SocialMedia from "./SocialMedia";
 
 function Header() {
   return (
@@ -18,21 +15,6 @@ function Header() {
   );
 }
 
-const SocialMedia = () => (
-  <div className="social-links d-flex">
-    <NavLink href="" target="_blank">
-      <Telegram />
-    </NavLink>
-    <NavLink href="" target="_blank">
-      <Discord />
-    </NavLink>
-    <NavLink href="" target="_blank">
-      <Medium />
-    </NavLink>
-    <NavLink href="" target="_blank">
-      <Twitter />
-    </NavLink>
-  </div>
-);
+
 
 export default Header;

@@ -1,16 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { Image, Spinner } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import GlassCard from "components/GlassCard";
 import BottomNavigation from "components/BottomNavigation";
 import { ActionButton } from "components/buttons";
 import shareIcon from "assets/share.png";
-import { redeemNft } from "helpers/http/apis";
 import { ReactComponent as Copy } from "assets/copy.svg";
-import toast from "react-hot-toast";
 import { useAuth } from "contexts/auth-context";
 import { showError, showMsg } from "helpers/utils";
-import { useLocation } from "react-router-dom";
 
 const Wrapper = styled.section`
   text-align: center;

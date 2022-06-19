@@ -21,8 +21,60 @@ const MyGlobalStyle = styled.createGlobalStyle`
   button {
     font-family: ${myTheme.font.secondary};
   }
-  .font-secondary{
+  .font-secondary {
     font-family: ${myTheme.font.secondary};
+  }
+
+  @keyframes bounce {
+    0% {
+      transform: scale(1);
+    }
+    20% {
+      transform: scale(0.9);
+    }
+    40% {
+      transform: scale(1.05);
+    }
+    60% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes blurAnimation {
+    0% {
+      backdrop-filter: blur(4px);
+    }
+    10% {
+      backdrop-filter: blur(6px) brightness(1.02);
+    }
+    30% {
+      backdrop-filter: blur(10px) brightness(1.05);
+    }
+    50% {
+      backdrop-filter: blur(7px) brightness(1.04);
+    }
+    57% {
+      backdrop-filter: blur(6px);
+    }
+    64% {
+      backdrop-filter: blur(5px);
+    }
+    100% {
+      backdrop-filter: blur(4px);
+    }
+  }
+  @keyframes background {
+    0% {
+      background-position: 0 0;
+    }
+    50% {
+      background-position: 0 30px;
+    }
+    100% {
+      background-position: 0 0;
+    }
   }
 `;
 export default MyGlobalStyle;

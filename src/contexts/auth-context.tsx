@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { getProfile } from "helpers/http/apis";
 import { UserType } from "modules/add-email/types";
 import authReducer, { ActionTypes, INITIAL_STATE } from "./auth-reducer";
+import useLocalStorage from "hooks/useLocalStorage";
+import { getStep } from "const/stepper";
+import { Step } from "types/steps.type";
 
 interface AuthContextType {
   authorize: (token: string) => void;
@@ -12,6 +15,8 @@ interface AuthContextType {
   isAuthenticated: boolean;
   user: null | UserType;
   error: null | string;
+  activeStep: any;
+  onNextStep: () => void;
 }
 
 const AuthContext = React.createContext<AuthContextType>({
@@ -20,16 +25,33 @@ const AuthContext = React.createContext<AuthContextType>({
   isAuthenticated: false,
   isBootstrapped: false,
   error: null,
+  activeStep: "default",
+  onNextStep: () => {},
 });
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
+
   const [authState, dispatch] = React.useReducer(authReducer, INITIAL_STATE);
-  // console.log("authState", authState);
+  const [currentStep, setCurrentStep] = useLocalStorage<Step>(
+    "currentStep",
+    "default"
+  );
+
+  const activeStep = React.useMemo<any>(() => {
+    const current = getStep(currentStep);
+    return current || {};
+  }, [currentStep]);
+
+  const onNextStep = useCallback(() => {
+    const nextStep = getStep(activeStep?.next);
+    setCurrentStep(activeStep?.next);
+    nextStep?.path && navigate(nextStep?.path);
+  }, [activeStep?.next, navigate, setCurrentStep]);
+
   const getUserProfile = useCallback((cb?: () => void) => {
     getProfile()
       .then((res) => {
-        // setUser(res.data);
         dispatch({ type: ActionTypes.AUTHORIZE_USER, payload: res.data });
         cb && cb();
       })
@@ -40,7 +62,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
         });
       });
   }, []);
-  
+
   React.useEffect(() => {
     const token = Cookies.get("token");
     if (token) {
@@ -49,7 +71,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
       return;
     }
     dispatch({ type: ActionTypes.SET_BOOTSTRAPPED });
-  }, [getUserProfile]);
+  }, [activeStep?.path, getUserProfile, navigate]);
 
   const authorize = React.useCallback(
     (token: string) => {
@@ -68,8 +90,10 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
       isAuthenticated,
       isBootstrapped,
       error,
+      activeStep,
+      onNextStep,
     };
-  }, [authorize, authState]);
+  }, [authState, authorize, activeStep, onNextStep]);
 
   return authState.isBootstrapped ? (
     <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

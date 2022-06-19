@@ -11,7 +11,7 @@ import { Link as NavLink } from "react-router-dom";
 require("dotenv").config();
 
 const SetupImx = ({ referral }: { referral?: string }) => {
-  const { authorize, isAuthenticated } = useAuth();
+  const { authorize, isAuthenticated, onNextStep } = useAuth();
   const link = new Link(process.env.REACT_APP_ROPSTEN_LINK_URL);
   // const [client, setClient] = useState<ImmutableXClient>();
   const client = useRef<ImmutableXClient>();
@@ -63,16 +63,15 @@ const SetupImx = ({ referral }: { referral?: string }) => {
   return (
     <>
       {isAuthenticated ? (
-        <NavLink to="/discord">
-          <ActionButton
-            variant="primary"
-            size="lg"
-            className="mt-4"
-            disabled={loading}
-          >
-            Wallet connected
-          </ActionButton>
-        </NavLink>
+        <ActionButton
+          variant="primary"
+          size="lg"
+          className="mt-4"
+          disabled={loading}
+          onClick={onNextStep}
+        >
+          Wallet connected
+        </ActionButton>
       ) : (
         <ActionButton
           onClick={linkSetup}

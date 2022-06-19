@@ -9,6 +9,7 @@ import { redeemNft } from "helpers/http/apis";
 import { ReactComponent as Arrow } from "assets/arrow-right.svg";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "contexts/auth-context";
 
 const Wrapper = styled.section`
   text-align: center;
@@ -18,7 +19,7 @@ const Wrapper = styled.section`
 `;
 
 function ClaimNft() {
-  const navigate = useNavigate();
+  const { onNextStep } = useAuth();
   const [state, setState] = React.useState({
     data: null,
     loading: false,
@@ -33,7 +34,7 @@ function ClaimNft() {
       success: (res) => {
         if (res.status) {
           setState({ error: null, data: res, loading: false });
-          navigate("/invite");
+          onNextStep();
         } else {
           setState({ error: res.message, data: null, loading: false });
         }
