@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import GlassCard from "components/GlassCard";
 import BottomNavigation from "components/BottomNavigation";
 import { ActionButton } from "components/buttons";
-import discord from "assets/discord-logo.svg";
-import checkmark from "assets/checkmark.svg";
 import { linkDiscord } from "helpers/http/apis";
 import { showMsg } from "helpers/utils";
 import { useAuth } from "contexts/auth-context";
+import discord from "assets/discord-logo.svg";
+import checkmark from "assets/checkmark.svg";
 
 const Wrapper = styled.section`
   text-align: center;
@@ -32,6 +32,7 @@ const Wrapper = styled.section`
 
 function Discord() {
   const [discordLinked, setDiscordLinked] = useState(false);
+  const { onNextStep } = useAuth();
   const { user } = useAuth();
   useEffect(() => {
     if (user?.discord_member_id) {
@@ -65,11 +66,14 @@ function Discord() {
           {discordLinked ? "Discord linked" : "Join the community"}
         </h1>
         {discordLinked ? (
-          <Link to="/add-email">
-            <ActionButton variant="primary" size="lg" className="mt-4">
-              Continue
-            </ActionButton>
-          </Link>
+          <ActionButton
+            variant="primary"
+            size="lg"
+            className="mt-4"
+            onClick={onNextStep}
+          >
+            Continue
+          </ActionButton>
         ) : (
           <a
             target="_blank"

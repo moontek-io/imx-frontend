@@ -4,6 +4,7 @@ import { Image } from "react-bootstrap";
 import { ActionButton } from "components/buttons";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useAuth } from "contexts/auth-context";
 const SuccessWrapper = styled.div`
   .success-description {
     text-align: center;
@@ -13,6 +14,7 @@ const SuccessWrapper = styled.div`
   }
 `;
 function Success() {
+  const { onNextStep } = useAuth();
   return (
     <SuccessWrapper>
       <figure>
@@ -23,11 +25,15 @@ function Success() {
         Your email successfully verified! Please click continue to Claim your
         NFT
       </p>
-      <Link to="/claim-nft">
-        <ActionButton variant="primary" size="lg" className="mt-4">
-          Continue
-        </ActionButton>
-      </Link>
+
+      <ActionButton
+        variant="primary"
+        size="lg"
+        className="mt-4"
+        onClick={onNextStep}
+      >
+        Continue
+      </ActionButton>
     </SuccessWrapper>
   );
 }

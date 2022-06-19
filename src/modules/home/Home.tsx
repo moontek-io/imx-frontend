@@ -1,5 +1,6 @@
 import { ActionButton } from "components/buttons";
 import GlassCard from "components/GlassCard";
+import siteData from "data/siteData";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -16,12 +17,8 @@ function Home() {
   return (
     <HomeWrapper>
       <GlassCard>
-        <h1 className="text-uppercase">The main title goes here</h1>
-        <p className="mt-2">
-          Subtext Goes here lorem ipsum dolor sit amet, consectetur adipiscing{" "}
-          <br />
-          elit. Rhoncus non, diam sit etiam. Mi morbi egestas varius.
-        </p>
+        <h1 className="text-uppercase">{siteData.title}</h1>
+        <p className="mt-2">{siteData.description}</p>
         <Link to="/connect">
           <ActionButton variant="primary" size="lg" className="mt-4">
             Join now

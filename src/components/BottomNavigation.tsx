@@ -1,34 +1,7 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "contexts/auth-context";
 import styled from "styled-components";
-
-const MENU_ITEMS = [
-  {
-    id: "connect",
-    label: "Connect wallet",
-    path: "/connect",
-  },
-  {
-    id: "join-discord",
-    label: "Join discord",
-    path: "/discord",
-  },
-  {
-    id: "add-email",
-    label: "Add Email",
-    path: "/add-email",
-  },
-  {
-    id: "claim-nft",
-    label: "Claim Your nft",
-    path: "/claim-nft",
-  },
-  {
-    id: "invite-friends",
-    label: "Invite your friend",
-    path: "/invite",
-  },
-];
+import cns from "classnames";
+import { STEPPER } from "const/stepper";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -36,23 +9,31 @@ const Wrapper = styled.div`
   justify-content: center;
   margin-top: 2.5rem;
   ul {
-    display: flex;
-    justify-items: center;
     gap: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media (max-width: 768px) {
+      flex-direction: column;
+      margin-bottom: 1rem;
+    }
     li {
-      a {
+      &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+      .menuItem {
         text-transform: uppercase;
         text-decoration: none;
         font-family: ${(props) => props.theme.font.secondary};
         font-size: 1.125rem;
         font-weight: 500;
         color: #161c24;
-        line-height: 45px;
-        padding: 0 1.5rem;
+        padding: 0.65rem 1.5rem;
       }
       &.active {
         font-weight: 700;
-        a {
+        .menuItem {
           display: block;
           background: rgba(255, 255, 255, 0.14);
           backdrop-filter: blur(24px);
@@ -84,17 +65,20 @@ const Wrapper = styled.div`
 `;
 
 function BottomNavigation() {
-  const location = useLocation();
-
+  const { activeStep } = useAuth();
+  const menuItems = STEPPER.filter((item) => item.id !== "default");
   return (
     <Wrapper>
       <ul className="list-unstyled mb-0">
-        {MENU_ITEMS.map(({ id, label, path }) => (
+        {menuItems.map(({ id, label, path }) => (
           <li
             key={id}
-            className={location.pathname?.includes(path) ? "active" : ""}
+            className={cns({
+              active: activeStep?.path === path,
+              disabled: activeStep.disabled?.includes(id),
+            })}
           >
-            <Link to={path}>{label}</Link>
+            <span className="menuItem">{label}</span>
           </li>
         ))}
       </ul>

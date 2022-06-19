@@ -1,3 +1,4 @@
+import siteData from "data/siteData";
 import { NavLink } from "react-bootstrap";
 import styled from "styled-components";
 const FooterWrapper = styled.footer`
@@ -22,8 +23,8 @@ function Footer() {
     <div>
       <Divider />
       <FooterWrapper className="d-flex justify-content-center align-items-center p-2">
-        <NavLink>Terms & Conditions</NavLink> |{" "}
-        <NavLink>powered by moontek.io</NavLink>
+        <NavLink href={siteData.terms}>Terms & Conditions</NavLink> |{" "}
+        <NavLink href="">powered by moontek.io</NavLink>
       </FooterWrapper>
     </div>
   );

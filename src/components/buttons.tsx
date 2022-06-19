@@ -12,8 +12,15 @@ export const StyledButton = styled(Button)`
   height: 70px;
   border-radius: 0.75rem;
   box-shadow: 0 0 0 2px rgba(0, 95, 206, 0.17);
-  &.btn-primary-outline{
+  &.btn-primary-outline {
     background-color: transparent;
+  }
+
+  /* animation-iteration-count: infinite; */
+  &:hover {
+    animation-name: bounce;
+    /* animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1); */
+    animation-duration: .75s;
   }
 `;
 

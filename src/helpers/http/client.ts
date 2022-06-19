@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
+
 const onResponse = (response: AxiosResponse): AxiosResponse => {
   console.info(`[response] [${JSON.stringify(response)}]`);
   return response;
@@ -17,6 +18,7 @@ const onResponseError = (error: AxiosError): Promise<AxiosError> => {
   }
   return Promise.reject(error);
 };
+
 export const apiClient = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
