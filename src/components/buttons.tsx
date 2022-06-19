@@ -18,9 +18,11 @@ export const StyledButton = styled(Button)`
 
   /* animation-iteration-count: infinite; */
   &:hover {
+    /* transform: scale(1.05); */
+
     animation-name: bounce;
-    /* animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1); */
-    animation-duration: .75s;
+    animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
+    animation-duration: 0.75s;
   }
 `;
 

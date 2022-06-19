@@ -70,7 +70,7 @@ const MyGlobalStyle = styled.createGlobalStyle`
       background-position: 0 0;
     }
     50% {
-      background-position: 0 30px;
+      background-position: 0 -10px;
     }
     100% {
       background-position: 0 0;

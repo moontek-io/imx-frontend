@@ -19,8 +19,8 @@ const Wrapper = styled.div`
   }
   background-position: 0 0;
   animation-name: background;
-  /* animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1); */
-  animation-duration: 30s;
+  animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
+  animation-duration: 15s;
   animation-iteration-count: infinite;
   box-shadow: 0 0 60px rgb(0, 0, 0, 0.2);
 `;
