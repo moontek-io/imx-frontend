@@ -35,7 +35,7 @@ function InviteFriend() {
         },
         function () {
           /* clipboard write failed */
-          alert("failed");
+          showError("failed");
         }
       );
   };

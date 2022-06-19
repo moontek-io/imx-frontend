@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { setToken } from "helpers/http/client";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
@@ -33,10 +33,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
 
   const [authState, dispatch] = React.useReducer(authReducer, INITIAL_STATE);
-  const [currentStep, setCurrentStep] = useLocalStorage<Step>(
-    "currentStep",
-    "default"
-  );
+  const [currentStep, setCurrentStep] = useState<Step>("default");
 
   const activeStep = React.useMemo<any>(() => {
     const current = getStep(currentStep);
@@ -49,22 +46,25 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     nextStep?.path && navigate(nextStep?.path);
   }, [activeStep?.next, navigate, setCurrentStep]);
 
-  const getUserProfile = useCallback((cb?: () => void) => {
-    getProfile()
-      .then((res) => {
-        dispatch({ type: ActionTypes.AUTHORIZE_USER, payload: res.data });
-        cb && cb();
-        const step = getStep(res.data.active_step);
-        setCurrentStep(res.data.active_step);
-        step?.path && navigate(step?.path);
-      })
-      .catch((err) => {
-        dispatch({
-          type: ActionTypes.AUTHORIZATION_FAILED,
-          payload: err?.response?.data?.message || err?.toString(),
+  const getUserProfile = useCallback(
+    (cb?: () => void) => {
+      getProfile()
+        .then((res) => {
+          dispatch({ type: ActionTypes.AUTHORIZE_USER, payload: res.data });
+          cb && cb();
+          const step = getStep(res.data.active_step);
+          setCurrentStep(res.data.active_step);
+          step?.path && navigate(step?.path);
+        })
+        .catch((err) => {
+          dispatch({
+            type: ActionTypes.AUTHORIZATION_FAILED,
+            payload: err?.response?.data?.message || err?.toString(),
+          });
         });
-      });
-  }, [navigate, setCurrentStep]);
+    },
+    [navigate, setCurrentStep]
+  );
 
   React.useEffect(() => {
     const token = Cookies.get("token");
