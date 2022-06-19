@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { getProfile } from "helpers/http/apis";
 import { UserType } from "modules/add-email/types";
 import authReducer, { ActionTypes, INITIAL_STATE } from "./auth-reducer";
-import useLocalStorage from "hooks/useLocalStorage";
 import { getStep } from "const/stepper";
 import { Step } from "types/steps.type";
 
@@ -44,27 +43,25 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     const nextStep = getStep(activeStep?.next);
     setCurrentStep(activeStep?.next);
     nextStep?.path && navigate(nextStep?.path);
-  }, [activeStep?.next, navigate, setCurrentStep]);
+  }, [activeStep?.next, navigate]);
 
-  const getUserProfile = useCallback(
-    (cb?: () => void) => {
-      getProfile()
-        .then((res) => {
-          dispatch({ type: ActionTypes.AUTHORIZE_USER, payload: res.data });
-          cb && cb();
-          const step = getStep(res.data.active_step);
-          setCurrentStep(res.data.active_step);
-          step?.path && navigate(step?.path);
-        })
-        .catch((err) => {
-          dispatch({
-            type: ActionTypes.AUTHORIZATION_FAILED,
-            payload: err?.response?.data?.message || err?.toString(),
-          });
+  const getUserProfile = useCallback((cb?: () => void) => {
+    getProfile()
+      .then((res) => {
+        dispatch({ type: ActionTypes.AUTHORIZE_USER, payload: res.data });
+        cb && cb();
+        const step = getStep(res.data.active_step);
+        setCurrentStep(res.data.active_step);
+        step?.path && navigate(step?.path);
+      })
+      .catch((err) => {
+        dispatch({
+          type: ActionTypes.AUTHORIZATION_FAILED,
+          payload: err?.response?.data?.message || err?.toString(),
         });
-    },
-    [navigate, setCurrentStep]
-  );
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   React.useEffect(() => {
     const token = Cookies.get("token");

@@ -36,10 +36,12 @@ function ClaimNft() {
           onNextStep();
         } else {
           setState({ error: res.message, data: null, loading: false });
+          onNextStep();
         }
         return res.message;
       },
       error: (error) => {
+        onNextStep();
         setState({
           error: error?.response?.data?.message || error.toString(),
           data: null,
