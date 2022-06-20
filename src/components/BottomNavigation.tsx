@@ -2,6 +2,7 @@ import { useAuth } from "contexts/auth-context";
 import styled from "styled-components";
 import cns from "classnames";
 import { STEPPER } from "const/stepper";
+import { useLocation } from "react-router-dom";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -66,6 +67,7 @@ const Wrapper = styled.div`
 
 function BottomNavigation() {
   const { activeStep } = useAuth();
+  const location = useLocation();
   const menuItems = STEPPER.filter((item) => item.id !== "default");
   return (
     <Wrapper>
@@ -74,7 +76,7 @@ function BottomNavigation() {
           <li
             key={id}
             className={cns({
-              active: activeStep?.path === path,
+              active: location.pathname.includes(path),
               disabled: activeStep.disabled?.includes(id),
             })}
           >

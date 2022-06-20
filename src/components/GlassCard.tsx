@@ -12,10 +12,10 @@ const GlassCard = styled.div`
   transition: all 2s;
   &:hover {
     border-radius: 0.5rem;
-    animation-name: blurAnimation;
+    /* animation-name: blurAnimation;
     animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
     animation-duration: 5s;
-    animation-iteration-count: infinite;
+    animation-iteration-count: infinite; */
     box-shadow: 0 0 60px rgb(0, 0, 0, 0.2);
   }
 `;

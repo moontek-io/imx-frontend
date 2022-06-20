@@ -23,9 +23,7 @@ function ConnectWallet() {
         <figure>
           <Image fluid width="188" src={wallet} alt="IMX Logo" />
         </figure>
-        <h1 className="text-uppercase">
-          Connect your crypto wallet. your bounty will be yours at last.
-        </h1>
+        <h1 className="text-uppercase">Connect your crypto wallet</h1>
         <SetupImx referral={referralCode} />
       </GlassCard>
       <BottomNavigation />

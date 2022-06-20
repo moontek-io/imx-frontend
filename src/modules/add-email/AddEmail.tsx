@@ -47,7 +47,9 @@ function AddEmail() {
       <GlassCard>
         {currentStep === "email" && (
           <>
-            <h1 className="text-uppercase">Add email to continue</h1>
+            <h1 className="text-uppercase">
+              Verify your email to continue to the next step
+            </h1>
             <p className="m-auto mt-2 " style={{ maxWidth: 780 }}>
               Please enter your email address. To continue to the next page.
               Verify it by clicking the link sent to your email to claim more

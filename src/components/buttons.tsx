@@ -12,17 +12,17 @@ export const StyledButton = styled(Button)`
   height: 70px;
   border-radius: 0.75rem;
   box-shadow: 0 0 0 2px rgba(0, 95, 206, 0.17);
+
+  transition: 0.5s ease-in-out;
   &.btn-primary-outline {
     background-color: transparent;
   }
-
   /* animation-iteration-count: infinite; */
+  transition: all 0.15s ease-in-out 0s;
   &:hover {
-    /* transform: scale(1.05); */
-
-    animation-name: bounce;
-    animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
-    animation-duration: 0.75s;
+    box-shadow: rgb(0 0 0 / 10%) 0px 0px 15px 0px;
+    transform: scale(1.065) translateY(-0.15rem);
+  
   }
 `;
 
