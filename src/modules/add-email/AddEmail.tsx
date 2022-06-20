@@ -27,7 +27,7 @@ function AddEmail() {
   const [currentStep, setCurrentStep] = useState<Steps>("email");
 
   useEffect(() => {
-    if (user?.user_email_id) {
+    if (user?.is_confirmed) {
       setCurrentStep("done");
     }
   }, [user]);
