@@ -42,6 +42,9 @@ npm start
 
 Open [http://localhost:4444](http://localhost:4444) with your browser to see the result.
 
+## Support
+
+Using the template? Support this effort by giving a star on GitHub, sharing your own blog and giving a shoutout on Twitter.
 
 # imx-frontend
 Typical web3 register flow open source project (by  moontek.io)
