@@ -3,7 +3,7 @@ const siteData = {
   description: `Subtext Goes here lorem ipsum dolor sit amet, consectetur adipiscing
   elit. Rhoncus non, diam sit etiam. Mi morbi egestas varius.`,
   // links
-  terms: 'https://google.com/',
+  terms: "",
   // social
   telegram: "https://telegram.org/",
   discord: "https://discord.com/",

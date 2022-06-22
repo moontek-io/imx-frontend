@@ -23,7 +23,9 @@ function Footer() {
     <div>
       <Divider />
       <FooterWrapper className="d-flex justify-content-center align-items-center p-2">
-        <NavLink href={siteData.terms}>Terms & Conditions</NavLink> |{" "}
+        {siteData.terms && (
+          <NavLink href={siteData.terms}>Terms & Conditions</NavLink>
+        )}
         <NavLink href="">powered by moontek.io</NavLink>
       </FooterWrapper>
     </div>

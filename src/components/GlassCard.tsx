@@ -18,5 +18,8 @@ const GlassCard = styled.div`
     animation-iteration-count: infinite; */
     box-shadow: 0 0 60px rgb(0, 0, 0, 0.2);
   }
-`;
+
+  animation: fadeIn; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 1s; /* don't forget to set a duration! */
+`; 
 export default GlassCard;

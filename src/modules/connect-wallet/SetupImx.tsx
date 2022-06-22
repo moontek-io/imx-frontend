@@ -6,7 +6,6 @@ import { Spinner } from "react-bootstrap";
 import { ReactComponent as Arrow } from "../../assets/arrow-right.svg";
 import { register } from "helpers/http/apis";
 import { useAuth } from "contexts/auth-context";
-import { Link as NavLink } from "react-router-dom";
 
 require("dotenv").config();
 

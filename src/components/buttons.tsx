@@ -18,11 +18,11 @@ export const StyledButton = styled(Button)`
     background-color: transparent;
   }
   /* animation-iteration-count: infinite; */
-  transition: all 0.15s ease-in-out 0s;
+  transition: all 0.05s ease-in-out 0s;
+
   &:hover {
     box-shadow: rgb(0 0 0 / 10%) 0px 0px 15px 0px;
-    transform: scale(1.065) translateY(-0.15rem);
-  
+    transform: scale(1.025) translateY(-0.05rem);
   }
 `;
 

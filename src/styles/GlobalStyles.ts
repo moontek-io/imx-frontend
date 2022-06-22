@@ -76,5 +76,14 @@ const MyGlobalStyle = styled.createGlobalStyle`
       background-position: 0 0;
     }
   }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
 `;
 export default MyGlobalStyle;

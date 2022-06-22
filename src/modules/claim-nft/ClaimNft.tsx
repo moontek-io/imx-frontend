@@ -8,7 +8,6 @@ import nfticon from "assets/NFT.svg";
 import { redeemNft } from "helpers/http/apis";
 import { ReactComponent as Arrow } from "assets/arrow-right.svg";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "contexts/auth-context";
 
 const Wrapper = styled.section`

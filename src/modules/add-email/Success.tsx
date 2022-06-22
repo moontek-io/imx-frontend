@@ -1,9 +1,7 @@
-import React from "react";
 import successCheckMark from "assets/success.svg";
 import { Image } from "react-bootstrap";
 import { ActionButton } from "components/buttons";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { useAuth } from "contexts/auth-context";
 const SuccessWrapper = styled.div`
   .success-description {
