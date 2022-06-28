@@ -26,7 +26,7 @@ function Footer() {
         {siteData.terms && (
           <NavLink href={siteData.terms}>Terms & Conditions</NavLink>
         )}
-        <NavLink href="">powered by moontek.io</NavLink>
+        <NavLink href="https://www.moontek.io/" target="_blank">powered by moontek.io</NavLink>
       </FooterWrapper>
     </div>
   );
