@@ -53,3 +53,5 @@ Setting up locally steps:
 - Clone the project
 - Install dependencies using `npm install`
 - Start the server using `npm start`
+# Backend
+To view the backend repository, go [here](https://github.com/moontek-io/web3-register-backend).
