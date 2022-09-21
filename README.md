@@ -1,4 +1,4 @@
-# Web3 Register by moontek
+# Web3 Register by micro1
 
 This is a [React.js](https://reactjs.org/), [Immutable x](https://docs.x.immutable.com/) Authentication template. Probably the most feature-rich Web3 auth template out there. Comes out of the box configured with the latest technologies to make web3 authentication a breeze. Easily configurable and customizable. 
 
@@ -7,7 +7,7 @@ Check out the documentation below to get started.
 Facing issues? Check the [Issue page](https://github.com/moontek-io/imx-frontend/issues) and do a search on past issues. Feel free to open a new issue if none has been posted previously.
 
 ## Example DEMO
-[Web3 register by moontek](https://main.d2ssv8x9s1j8bf.amplifyapp.com/) - this repo
+[Web3 register by micro1](https://main.d2ssv8x9s1j8bf.amplifyapp.com/) - this repo
 
 ## Features
 - Authenticate with metamask or any other web3 provider
@@ -47,7 +47,7 @@ Open [http://localhost:4444](http://localhost:4444) with your browser to see the
 Using the template? Support this effort by giving a star on GitHub, sharing your own blog and giving a shoutout on Twitter.
 
 # imx-frontend
-Typical web3 register flow open source project (by  moontek.io)
+Typical web3 register flow open source project (by  micro1.io)
 
 Setting up locally steps: 
 - Clone the project
